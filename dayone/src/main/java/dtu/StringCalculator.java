@@ -1,5 +1,8 @@
 package dtu;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StringCalculator {
 
     public int add(String s) {
@@ -23,13 +26,18 @@ public class StringCalculator {
 
         String[] array = s.split("[" + delimiter + "\n]");
         int sum = 0;
+        List<Integer> negatives = new ArrayList<>();
 
         for (String item : array) {
             int num = Integer.parseInt(item);
             if (num < 0) {
-                throw new IllegalArgumentException("Negatives not allowed");
+                negatives.add(num);
             }
             sum += num;
+        }
+
+        if (!negatives.isEmpty()) {
+            throw new IllegalArgumentException("negatives not allowed: " + negatives);
         }
 
         return sum;
